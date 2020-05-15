@@ -41,6 +41,9 @@ def enumerate(int vendor_id=0, int product_id=0):
   hid_free_enumeration(info)
   return res
 
+def exit():
+  hid_exit()
+
 cdef class device:
   cdef hid_device *_c_hid
 
@@ -75,7 +78,6 @@ cdef class device:
       if self._c_hid != NULL:
           hid_close(self._c_hid)
           self._c_hid = NULL
-          hid_exit()
 
   def write(self, buff):
       '''Accept a list of integers (0-255) and send them to the device'''
